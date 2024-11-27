@@ -32,7 +32,7 @@ RUN yum install -y                        \
 RUN pip3 install --no-cache-dir gcovr
 
 RUN curl -sSfL -o cmake-3.31.1-linux.sh \
-      https://github.com/Kitware/CMake/releases/download/v3.29.2/cmake-3.31.1-linux-$(uname -m).sh \
+      https://github.com/Kitware/CMake/releases/download/v3.31.1/cmake-3.31.1-linux-$(uname -m).sh \
     && bash cmake-3.31.1-linux.sh -- --prefix=/usr --skip-license \
     && /usr/bin/rm -f cmake-3.31.1-linux.sh
 
