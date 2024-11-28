@@ -13,6 +13,8 @@ RUN yum install -y                        \
         gcc-toolset-14-libstdc++-devel    \
         gcc-toolset-14-libtsan-devel      \
         gcc-toolset-14-libubsan-devel     \
+        gdb                               \
+        gdb-gdbserver                     \
     && yum install -y                     \
         clang-18.1.8                      \
         clang-devel-18.1.8                \
