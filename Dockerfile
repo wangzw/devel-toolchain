@@ -16,13 +16,13 @@ RUN yum install -y                        \
         gdb                               \
         gdb-gdbserver                     \
     && yum install -y                     \
-        clang-18.1.8                      \
-        clang-devel-18.1.8                \
-        clang-tools-extra-18.1.8          \
-        llvm-devel-18.1.8                 \
-        llvm-toolset-18.1.8               \
+        clang-19.1.7                      \
+        clang-devel-19.1.7                \
+        clang-tools-extra-19.1.7          \
+        llvm-devel-19.1.7                 \
+        llvm-toolset-19.1.7               \
     && yum install -y autoconf automake bison flex git graphviz libtool make perl rpm-build rpm-sign rsync sudo tmux which \
-    && yum install -y python3-pip python-unversioned-command                                \
+    && yum install -y python3.12 python3.12-pip python-unversioned-command                                \
     && yum-config-manager --add-repo https://download.docker.com/linux/rhel/docker-ce.repo  \
     && yum install -y docker-ce-cli                                                         \
     && yum-config-manager --set-disabled docker-ce-stable                                   \
@@ -31,12 +31,14 @@ RUN yum install -y                        \
     && /usr/bin/rm -f /etc/profile.d/which2.sh                                              \
     && /usr/bin/rm -f /etc/profile.d/which2.csh
 
-RUN pip3 install --no-cache-dir gcovr
+RUN alternatives --install /usr/bin/python3 python3 /usr/bin/python3.12 1
+RUN alternatives --install /usr/bin/pip3 pip3.12 /usr/bin/pip-3.12 1
+RUN pip3 install --no-cache-dir gcovr breathe
 
-RUN curl -sSfL -o cmake-3.31.1-linux.sh \
-      https://github.com/Kitware/CMake/releases/download/v3.31.1/cmake-3.31.1-linux-$(uname -m).sh \
-    && bash cmake-3.31.1-linux.sh -- --prefix=/usr --skip-license \
-    && /usr/bin/rm -f cmake-3.31.1-linux.sh
+RUN curl -sSfL -o cmake-3.31.8-linux.sh \
+      https://github.com/Kitware/CMake/releases/download/v3.31.8/cmake-3.31.8-linux-$(uname -m).sh \
+    && bash cmake-3.31.8-linux.sh -- --prefix=/usr --skip-license \
+    && /usr/bin/rm -f cmake-3.31.8-linux.sh
 
 RUN <<EOF cat >>/opt/devel-gcc-14-toolchain.cmake
 set(DEVELOP_COMPILER_ROOT /opt/rh/gcc-toolset-14/root)
