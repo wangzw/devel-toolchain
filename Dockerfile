@@ -40,7 +40,7 @@ RUN curl -sSfL -o cmake-3.31.8-linux.sh \
     && bash cmake-3.31.8-linux.sh -- --prefix=/usr --skip-license \
     && /usr/bin/rm -f cmake-3.31.8-linux.sh
 
-RUN <<EOF cat >>/opt/devel-gcc-14-toolchain.cmake
+RUN <<EOF cat >>/opt/gcc-toolset-14-toolchain.cmake
 set(DEVELOP_COMPILER_ROOT /opt/rh/gcc-toolset-14/root)
 
 set(CMAKE_C_COMPILER /opt/rh/gcc-toolset-14/root/usr/bin/gcc)
@@ -64,4 +64,28 @@ set(CMAKE_STRIP /opt/rh/gcc-toolset-14/root/usr/bin/strip)
 
 set(GCOV_PATH /opt/rh/gcc-toolset-14/root/usr/bin/gcov)
 set(CPPFILT_PATH /opt/rh/gcc-toolset-14/root/usr/bin/c++filt)
+EOF
+
+RUN <<EOF cat >>/opt/llvm-toolset-19-toolchain.cmake
+set(CMAKE_C_COMPILER /usr/bin/clang)
+set(CMAKE_C_COMPILER_AR /usr/bin/llvm-ar)
+set(CMAKE_C_COMPILER_RANLIB /usr/bin/llvm-ranlib)
+
+set(CMAKE_CXX_COMPILER /usr/bin/clang++)
+set(CMAKE_CXX_COMPILER_AR /usr/bin/llvm-ar)
+set(CMAKE_CXX_COMPILER_RANLIB /usr/bin/llvm-ranlib)
+
+set(CMAKE_AR /usr/bin/llvm-ar)
+set(CMAKE_RANLIB /usr/bin/llvm-ranlib)
+
+set(CMAKE_NM /usr/bin/llvm-nm)
+set(CMAKE_OBJCOPY /usr/bin/llvm-objcopy)
+set(CMAKE_OBJDUMP /usr/bin/llvm-objdump)
+set(CMAKE_ADDR2LINE /usr/bin/llvm-addr2line)
+set(CMAKE_READELF /usr/bin/llvm-readelf)
+set(CMAKE_STRIP /usr/bin/llvm-strip)
+
+set(GCOV_PATH /usr/bin/gcov)
+set(LLVM_COV_PATH /usr/bin/llvm-cov)
+set(CPPFILT_PATH /usr/bin/llvm-cxxfilt)
 EOF
