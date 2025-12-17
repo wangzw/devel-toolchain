@@ -22,7 +22,7 @@ RUN yum install -y                        \
         llvm-devel-20.1.8                 \
         llvm-toolset-20.1.8               \
     && yum install -y dnf-plugins-core yum-utils \
-    && yum install systemd                       \
+    && yum install -y systemd                    \
     && yum install -y autoconf automake bison flex git graphviz libtool make perl rpm-build rpm-sign rsync sudo tmux which \
     && yum install -y python3.12 python3.12-pip python-unversioned-command                  \
     && yum-config-manager --add-repo https://download.docker.com/linux/rhel/docker-ce.repo  \
